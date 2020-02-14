@@ -5,19 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Tip Calc</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hh
-        xv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-      crossorigin="anonymous"
-    />
+
     <style></style>
   </head>
 
   <body>
     <div class="container">
-      <label>Total</label><br />
+      <label>Bill Total</label><br />
       <input type="number" id="input-bill" name="input-bill" /><br /><br />
 
       <label>Tip %</label><br />
@@ -58,7 +52,18 @@
       inputTip.addEventListener("change", handleBill);
       inputPeople.addEventListener("change", handleBill);
 
-      function handleBill() {
+      //   inputTip.addEventListener("change", function(e) {
+      //     const newTipPercent = parseFloat(e.target.value);
+      //     if (!NaN(newTipPercent)) {
+      //       tipPercent = newTipPercent;
+      //     } else {
+      //       e.target.value = tipPercent;
+      //     }
+      //     console.log(tipPercent);
+      //     handleBill();
+      //   });
+
+      function handleBill(e) {
         const bill = parseInt(inputBill.value); // parseInt to get the number only and not a string
         const percent = parseInt(inputTip.value);
         const people = parseInt(inputPeople.value);
@@ -67,9 +72,21 @@
         const total = bill + tip;
         const per_person = total / people;
 
-        displayTip.innerHTML = "$" + tip.toFixed(2);
-        displayTotal.innerHTML = "$" + total.toFixed(2);
-        displayPeople.innerHTML = "$" + per_person.toFixed(2);
+        const newTipPercent = parseFloat(e.target.value);
+
+        // if (!isNaN(newTipPercent)) {
+        //   tipPercent = newTipPercent;
+        // } else {
+        //   e.target.value = tipPercent;
+        // }
+
+        if (!isNaN(tip)) {
+          displayTip.innerHTML = "$" + tip.toFixed(2);
+        }
+        if (!isNaN(total)) {
+          displayTotal.innerHTML = "$" + total.toFixed(2);
+          displayPeople.innerHTML = "$" + per_person.toFixed(2);
+        }
       }
     </script>
   </body>
